@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .wrapper {
+      width: 100vw;
+      height: 100vh;
+      background-image: linear-gradient(150deg, #3f00fc, #d0d0ce);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .clock-container {
+      background-image: url(pngegg.png);
+      width: 400px;
+      height: 400px;
+      position: relative;
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+    .center {
+      position: absolute;
+      background-color: black;
+      padding: 5px;
+      border-radius: 50%;
+      z-index: 400;
+    }
+
+    .hand {
+
+      position: absolute;
+      width: 4px;
+
+      /* top:40px; */
+      bottom: 50%;
+      transform: rotateZ(0deg);
+      transform-origin: bottom;
+    }
+
+    .hand.sec {
+      background-color: red;
+      height: 160px;
+    }
+
+    .hand.min {
+      background-color: blue;
+      height: 140px;
+      transform: rotateZ(0deg);
+      z-index: 150;
+
+    }
+
+    .hand.hour {
+      height: 100px;
+      transform: rotateZ(0deg);
+      background-color: green;
+      z-index: 200;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="clock-container">
+      <img src="pngegg.png" alt="" width="400px" height="400px">
+      <div class="center">
+
+      </div>
+      <div class="hand hour"></div>
+      <div class="hand min"></div>
+      <div class="hand sec"></div>
+    </div>
+
+    <!-- //lets make a digital clock --> 
+     <div class="digital" style="display: flex; gap:3px ; background-color: rgba(184, 205, 214, 0.371); padding: 10px; border-radius: 10px; font-weight: bolder; font-size: 25px; padding: 15px 30px;">
+       <div class="hourdig" style="color: green;">0 hour</div>
+       <div class="mindig" style="color: blue;">0 min</div>
+      <div class="secdig" style="color: red;">0 sec</div>
+     </div>
+
+  </div>
+
+
+  <script>
+    const sechand = document.querySelector('.sec')
+    const minhand = document.querySelector('.min')
+    const hourhand = document.querySelector('.hour')
+
+    const secdig = document.querySelector('.secdig')
+    const mindig = document.querySelector('.mindig')
+    const hourdig = document.querySelector('.hourdig')
+    let sec =0;
+    let min =0;
+    let hour =0;
+    let degree = 0;
+
+
+
+    function updatesec() {
+      degree = degree + 6;
+      sec = sec + 1;
+      //updating in UI 
+      sechand.style.setProperty('transform', `rotateZ(${degree}deg)`)
+      secdig.textContent = `${sec % 60} sec`;
+      
+
+
+    }
+    function updatemin() {
+      degree = degree + 6;
+      min = min +1;
+
+      //updating in UI 
+      minhand.style.setProperty('transform', `rotateZ(${degree}deg)`)
+      mindig.textContent = `${min % 60} min`;
+    }
+
+    function updatehour() {
+      degree = degree + 6;
+      hour = hour + 1;
+      //updating in UI 
+      hourhand.style.setProperty('transform', `rotateZ(${degree}deg)`)
+      hourdig.textContent = `${hour % 12} hour`;
+    }
+
+
+
+    // function updatemin(){
+    //   degree
+    // }
+
+    setInterval(updatesec, 1000)
+    setInterval(updatemin, 60000)
+    setInterval(updatehour, 3600000)
+
+  </script>
+</body>
+
+</html>
