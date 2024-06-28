@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Css Variables with js</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            color:white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .wrapper{
+       
+            height: 100vh;
+            width: 100vw;
+         
+           
+            /* background-color: #193549; */
+            background-image: linear-gradient(150deg ,#193549, rgb(3, 81, 111));
+
+        }
+
+        .container{
+            max-width: 1024px;
+            margin:0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+           
+         
+            gap:2rem;
+
+        }
+        .input-container{
+            display:flex;
+            gap:1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1{ 
+            padding-top: 35px;
+            font-size:2.5rem;
+        }
+
+        .image-container{
+            /* border:  100px; */
+            padding:100px;
+            background-color: coral;
+         
+            box-sizing: content-box;
+            filter:blur(0px)
+        
+        }
+     
+    </style>
+</head>
+<body>
+    
+    <div class="wrapper">
+        <div class="container">
+            <h1>
+                UPDATE CSS VARIABLES WITH <SPAN class="spanjs">JS</SPAN>
+            </h1>
+            <div class="input-container">
+                <label for="spacing">Spacing</label>
+                <input type="range" min="5" max="100"  value="10" id="spacing">
+                <label for="blur">Blur</label>
+                <input type="range" min="1" max="50" step="0.25" id="blur">
+                <label for="colorpicker">Pick Color</label>
+                <input type="color" id="colorpicker">
+    
+            </div>
+    
+    
+                <img src="old car.jpg" alt="old car" width="400px" height="300px" class="image-container">
+          
+        </div>
+    </div>
+
+    <script>
+        const spacing = document.querySelector('#spacing');
+        const blur =document.querySelector('#blur');
+        const colorpicker = document.querySelector('#colorpicker');
+        const spanjs = document.querySelector('.spanjs')
+
+        const img = document.querySelector('.image-container')
+        console.log(spacing)
+
+        spacing.addEventListener('input', (e)=>{
+            console.log(e.target.value)
+            let space = e.target.value
+            img.style.setProperty('padding', `${space}px`);
+
+
+        })
+
+        blur.addEventListener('input', (e)=>{
+            let blr = e.target.value
+            console.log(blr)
+            img.style.setProperty('filter', `blur(${blr}px)`);
+        })
+
+        colorpicker.addEventListener('input', (e)=>{
+            let color = e.target.value
+            console.log(color)
+            img.style.setProperty('background-color', color);
+            spanjs.style.color = color;
+        })
+    </script>
+
+</body>
+</html>
+
+<!-- e is the event object.
+e.target is the input element that triggered the event.
+e.target.value is the current value of that input element. 
+
+
+Event Object: When an event is fired, an event object is passed to the event handler. This object contains information about the event.
+
+Target Property: The target property of the event object refers to the element that triggered the event.
+
+Value Property: The value property is a property of the input element (or other form elements) that holds the current value of the element.
+
+
+document.getElementById('slider') gets the slider element.
+slider.addEventListener('input', (e) => { ... }) adds an event listener for the input event.
+Inside the event handler, e.target refers to the slider element.
+e.target.value gets the current value of the slider.
+valueDisplay.textContent = value updates the paragraph to display the current value.-->
