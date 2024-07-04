@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+  <!-- Sets the favicon to a checkmark icon -->
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+
+  <!-- Paragraph element with an onClick event that triggers the makeGreen function -->
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    // Array of dog objects with name and age properties
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    // Function to change the paragraph text color to green and increase font size
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55'; // Set text color to greenish (#BADA55)
+      p.style.fontSize = '50px'; // Increase font size to 50px
+    }
+
+    // Regular console log
+    console.log('hello');
+
+    // Interpolated console log, %s is replaced with the string '💩'
+    console.log('Hello I am a %s string!', '💩');
+
+    // Styled console log (currently commented out)
+    // Uncomment to see the styled text in the console
+    // console.log('%c I am some great text', 'font-size:50px; background:red; text-shadow: 10px 10px 0 blue')
+
+    // Console warning
+    console.warn('OH NOOO');
+
+    // Console error message
+    console.error('Shit!');
+
+    // Console info message
+    console.info('Crocodiles eat 3-4 people per year');
+
+    // Console assert to check if the paragraph element has a class 'ouch'
+    // If the assertion fails, it will log 'That is wrong!' in the console
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'That is wrong!');
+
+    // Clear the console
+    console.clear();
+
+    // Log the paragraph element in the console
+    console.log(p);
+    // Log the paragraph element as a DOM object in the console
+    console.dir(p);
+
+    // Clear the console again
+    console.clear();
+
+    // Grouping console logs together for each dog object
+    dogs.forEach(dog => {
+      // Start a collapsed console group with the dog's name
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`); // Log the dog's name
+      console.log(`${dog.name} is ${dog.age} years old`); // Log the dog's age
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`); // Log the dog's age in dog years
+      // End the console group
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // Console count to count the number of times a string is logged
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+
+    // Timing the fetch request
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json()) // Parse the JSON response
+      .then(data => {
+        // End the timer and log the time taken to fetch data
+        console.timeEnd('fetching data');
+        // Log the fetched data
+        console.log(data);
+      });
+
+    // Display the dogs array as a table in the console
+    console.table(dogs);
+
+  </script>
+</body>
+</html>
