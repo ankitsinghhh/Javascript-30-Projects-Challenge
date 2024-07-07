@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Key Detection</title>
+    <!-- Including an external JavaScript file -->
+    <script type="text/javascript" src="./cornify.js"></script>
+    <!-- Setting a favicon for the webpage -->
+    <link rel="icon" href="https://fav.farm/✅" />
+  </head>
+  <body>
+    <script>
+      // Array to store the sequence of keys pressed by the user
+      const pressed = [];
+      // The secret code we want to detect
+      const secretCode = "wesbos";
+
+      // Adding an event listener to the window for when a key is released (keyup event)
+      window.addEventListener("keyup", (e) => {
+        // Log the key that was released to the console
+        console.log(e.key);
+        // Add the released key to the end of the pressed array
+        pressed.push(e.key);
+        // Ensure that the pressed array only keeps the most recent keys up to the length of the secret code
+        // The -secretCode.length - 1 ensures we start splicing from the correct position
+        // The second parameter ensures we remove the excess keys beyond the length of the secret code
+        pressed.splice(
+          -secretCode.length - 1,
+          pressed.length - secretCode.length
+        );
+        // Check if the joined pressed keys form the secret code
+        if (pressed.join("").includes(secretCode)) {
+          // If the secret code is detected, log a success message to the console
+          console.log("DING DING!");
+          // Call the cornify_add function from the cornify.js script, which adds a unicorn or rainbow effect to the page
+          cornify_add();
+        }
+        // Log the current state of the pressed array to the console to track the sequence of keys
+        console.log(pressed);
+      });
+    </script>
+  </body>
+</html>
